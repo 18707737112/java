@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hr.dao.CustomerDao">
+
+    <insert id="addUser" parameterType="com.hr.model.HRM_customer">
+        <selectKey keyProperty="id" order="AFTER" resultType="integer">
+            SELECT last_insert_id()
+        </selectKey>
+        insert into HRM_CUSTOMER(C_ACCOUNT, C_PASS) values (#{c_account},#{c_pass})
+    </insert>
+
+    <select id="findUser" resultType="com.hr.model.HRM_customer">
+        select * from HRM_CUSTOMER where C_ACCOUNT=#{c_account} and C_PASS=#{c_pass}
+    </select>
+
+</mapper>
