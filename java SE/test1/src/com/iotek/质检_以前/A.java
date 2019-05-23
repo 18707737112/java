@@ -1,4 +1,4 @@
-package com.zy.质检_以前;
+package com.iotek.质检_以前;
 
 /*
 统计个位数是6，并且被3整除的5位数共有多少个。

@@ -1,4 +1,4 @@
-package com.zy.数组2;
+package com.iotek.数组2;
 
 /*
 *编程大赛即将拉开序幕，由于人选有限，

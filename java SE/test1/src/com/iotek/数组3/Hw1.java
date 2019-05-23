@@ -1,4 +1,4 @@
-package com.zy.数组3;
+package com.iotek.数组3;
 
 //封装一个方法，求一个一维数组的平均值
 public class Hw1 {

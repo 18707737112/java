@@ -1,4 +1,4 @@
-package com.zy.循环1;
+package com.iotek.循环1;
 /*
  *猴子吃桃问题：
  * 猴子第一天摘下若干个桃子，当即吃了一半，

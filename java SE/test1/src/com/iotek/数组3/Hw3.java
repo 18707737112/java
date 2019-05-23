@@ -1,4 +1,4 @@
-package com.zy.数组3;
+package com.iotek.数组3;
 
 /*
 * 封装一个静态方法遍历如下二维数组

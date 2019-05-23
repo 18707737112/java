@@ -1,4 +1,4 @@
-package com.zy.循环1;
+package com.iotek.循环1;
 //求1+1/3+1/5+...之和，
 // 直到某一项的值小于10-6时停止累加
 public class Hw3 {

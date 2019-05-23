@@ -1,4 +1,4 @@
-package com.zy.test;
+package com.iotek.test;
 
 public class B {
     public static void main(String[] args) {

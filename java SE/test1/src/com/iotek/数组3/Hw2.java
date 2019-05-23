@@ -1,4 +1,4 @@
-package com.zy.数组3;
+package com.iotek.数组3;
 
 import java.util.Scanner;
 

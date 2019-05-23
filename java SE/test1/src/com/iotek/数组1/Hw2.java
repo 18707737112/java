@@ -1,4 +1,4 @@
-package com.zy.数组1;
+package com.iotek.数组1;
 
 /*
 * 生成四位数的验证码--->

@@ -1,4 +1,4 @@
-package com.zy.zy5_21;
+package com.iotek.zy5_21;
 
 //给定一组排序整数，
 // 二分查找一个键值，

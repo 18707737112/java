@@ -1,4 +1,4 @@
-package com.zy.循环1;
+package com.iotek.循环1;
 
 //使用do-while单循环打印输出10~100之间
 // 所有能同时被5和9整除的整数

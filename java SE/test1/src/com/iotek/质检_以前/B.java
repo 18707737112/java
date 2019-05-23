@@ -1,4 +1,4 @@
-package com.zy.质检_以前;
+package com.iotek.质检_以前;
 
 /*
 有连个正整数a和b，已知a*b=2048，求
