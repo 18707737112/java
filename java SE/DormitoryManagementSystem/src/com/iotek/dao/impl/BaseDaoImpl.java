@@ -56,9 +56,9 @@ public class BaseDaoImpl<T> {
         } catch (EOFException e) {
             System.out.println("首次使用，"+file.getName()+"文件内容为空！");
         } catch (IOException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         } finally {
             if(ois != null){
                 try {
