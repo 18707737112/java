@@ -15,9 +15,10 @@
 
 
     <context:property-placeholder location="classpath:oracle.properties"/>
-
+    <context:component-scan base-package="com.hr"/>
+    <context:annotation-config/>
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <property name="driverClassName" value="oracle.jdbc.OracleDriver"/>
+        <property name="driverClassName" value="${jdbc.driver}"/>
         <property name="url" value="${jdbc.url}"/>
         <property name="username" value="${jdbc.username}"/>
         <property name="password" value="${jdbc.password}"/>

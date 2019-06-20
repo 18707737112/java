@@ -75,6 +75,7 @@ public class Game {
          System.out.println("请选择喂养的食物编号：");
          int b = input.nextInt();
          Foot foot = f[b-1];
+         System.out.println(m.getName()+"在喂"+pet.getName()+"吃"+foot.getType());
          m.feet(pet,foot);
          System.out.println("1.继续  2.退出");
          int n = input.nextInt();
