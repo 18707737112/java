@@ -10,5 +10,5 @@ public interface CheckDao {
     boolean updateCheck(Check check);//修改
     Check queryCheckById(int checkId);//指定编号查找
     List<Check> queryCheckByIdS(int studentId);//指定学号查找
-    List<Check> queryAllCheckS();//查询全部
+    List<Check> queryAllCheckS();//查询全部入/迁出单号
 }
