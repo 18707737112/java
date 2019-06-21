@@ -35,7 +35,7 @@ public class CheckDaoTest {
 
     @Test
     public void up(){
-        Check check = new Check(1,1,0);
+        Check check = new Check(1,1,1);
         checkDao.updateCheck(check);
 
         findAll();

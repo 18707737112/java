@@ -4,6 +4,7 @@ import com.iotek.dao.CheckDao;
 import com.iotek.entity.Check;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 //迁入/迁出
 public class CheckDaoImpl extends BaseDaoImpl<Check> implements CheckDao {
@@ -62,11 +63,18 @@ public class CheckDaoImpl extends BaseDaoImpl<Check> implements CheckDao {
         return null;
     }
 
-    /*@Override
-    public List<Check> queryCheckByIdS(int studentId) {
-        System.out.println("暂时不需要，还没写！");
-        return null;
-    }*/
+    @Override
+    public Check queryCheckByIdS(int studentId) {
+        List<Check> cList = read(checkFile);
+        Check check = new Check();
+        for (int i = 0; i < cList.size(); i++) {
+            Check c = cList.get(i);
+            if (c.getStudentId()==studentId){
+                check = c;
+            }
+        }
+        return check;
+    }
 
     @Override
     public List<Check> queryAllCheckS() {

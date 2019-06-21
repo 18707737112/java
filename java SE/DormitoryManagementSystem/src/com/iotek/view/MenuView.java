@@ -4,8 +4,12 @@ import com.iotek.biz.AdministratorBiz;
 import com.iotek.biz.StudentBiz;
 import com.iotek.biz.impl.AdministratorBizImpl;
 import com.iotek.biz.impl.StudentBizImpl;
+import com.iotek.dao.BedDao;
 import com.iotek.dao.StudentCardDao;
+import com.iotek.dao.StudentDao;
+import com.iotek.dao.impl.BedDaoImpl;
 import com.iotek.dao.impl.StudentCardDaoImpl;
+import com.iotek.dao.impl.StudentDaoImpl;
 import com.iotek.entity.*;
 import com.iotek.util.MyUtil;
 import com.iotek.util.RandomUtil;
@@ -18,9 +22,11 @@ import java.util.Scanner;
 public class MenuView {
     //private static int myMoney = 20;
     private static Scanner input = new Scanner(System.in);
+    private static BedDao bedDao = new BedDaoImpl();
     private static StudentCardDao studentCardDao = new StudentCardDaoImpl();
     private static AdministratorBiz administratorBiz = new AdministratorBizImpl();
     private static StudentBiz studentBiz = new StudentBizImpl();
+    //private static StudentDao studentDao = new StudentDaoImpl();
 
     // 主页
     public static void homeView(){
@@ -222,8 +228,12 @@ public class MenuView {
             System.out.println();
             System.out.println("***** 管理员主页 *****");
             System.out.println("1 . 个人信息");
-            System.out.println("2 . 学生信息");
-
+            System.out.println("2 . 学生管理");//管理学生信息，管理住宿
+            System.out.println("3 . 迁入迁出管理");
+            System.out.println("4 . 宿舍楼管理");
+            System.out.println("5 . 宿舍房间管理");
+            System.out.println("6 . 床位管理");
+            //System.out.println("7 . ");
             System.out.println("0 . 返回上一层");
             System.out.println("请选择编号：");
             int choice = MyUtil.inputNum(0, 8);
@@ -232,10 +242,10 @@ public class MenuView {
                     System.out.println(administrator);
                     break;
                 case 2:
-                    administratorBiz.lookAllStudents();
+                    studentMent();
                     break;
                 case 3:
-                    System.out.println();
+                    in_out();
                     break;
                 case 4:
 
@@ -255,17 +265,178 @@ public class MenuView {
     }
 
 
+    //学生管理
+    private static void studentMent() {
+        do {
+            System.out.println();
+            System.out.println("***** 学生管理 *****");
+            System.out.println("1 . 新增学生信息");
+            System.out.println("2 . 查询学生信息");
+            System.out.println("3 . 查询宿舍信息");
+            System.out.println("4 . 新人入住录入");
+            System.out.println("5 . 调换学生宿舍");
+            System.out.println("6 . 修改学生信息");
+            System.out.println("7 . 紧急修改学号");
+            System.out.println("0 . 返回上一层");
+            System.out.println("请选择编号：");
+            int choice = MyUtil.inputNum(0, 7);
+            switch (choice) {
+                case 1:
+                    System.out.println("请输入姓名");
+                    String name = input.next();
+                    System.out.println("请输入性别[1.男/2.女]");
+                    String sex;
+                    int intSex = MyUtil.inputNum(1,2);
+                    if (intSex == 1){
+                        sex = "男";
+                    }else {
+                        sex = "女";
+                    }
+                    Student student = new Student(name,sex);
+                    boolean fiag = administratorBiz.addStudent(student);
+                    if (fiag){
+                        System.out.println("提交成功！");
+                    }else {
+                        System.out.println("提交失败！");
+                    }
+                    break;
+                case 2:
+                    administratorBiz.lookAllStudents();
+                    break;
+
+                case 3:
+                    administratorBiz.lookAllBed();
+                    break;
+
+                case 4:
+                    System.out.println("请输入学号");
+                    int id = MyUtil.inputNum(0,Integer.MAX_VALUE);
+                    System.out.println("请输入宿舍楼号");
+                    int ssl = MyUtil.inputNum(0,100);
+                    System.out.println("请输入宿舍号");
+                    int ss = MyUtil.inputNum(0,100);
+                    System.out.println("请输入床位号");
+                    int cw = MyUtil.inputNum(0,10);
+                    System.out.println("请输入性别");
+                    String sex0 = input.next();
+                    Bed bed = new Bed(ssl,ss,cw,id);
+                    administratorBiz.addBed(bed,sex0);
+                    break;
+
+                case 5:
+                    System.out.println("请输入学号");
+                    int id1 = MyUtil.inputNum(0,Integer.MAX_VALUE);
+                    System.out.println("请输入宿舍楼号");
+                    int ssl1 = MyUtil.inputNum(0,100);
+                    System.out.println("请输入宿舍号");
+                    int ss1 = MyUtil.inputNum(0,100);
+                    System.out.println("请输入床位号");
+                    int cw1 = MyUtil.inputNum(0,10);
+                    System.out.println("请输入性别");
+                    String sex1 = input.next();
+                    Bed bed1 = new Bed(ssl1,ss1,cw1,id1);
+                    administratorBiz.updateBed(bed1,sex1);
+                    break;
+
+                case 6:
+                    System.out.println("请输入学号");
+                    int id2 = MyUtil.inputNum(0,Integer.MAX_VALUE);
+                    System.out.println("请输入姓名");
+                    String name2 = input.next();
+                    System.out.println("请输入性别[1.男/2.女]");
+                    String sex2;
+                    int intSex2 = MyUtil.inputNum(1,2);
+                    if (intSex2 == 1){
+                        sex2 = "男";
+                    }else {
+                        sex2 = "女";
+                    }
+                    Student student2 = new Student(id2,name2,sex2);
+                    administratorBiz.updateStudent(student2);
+                    break;
+
+                case 7:
+                    System.out.println("请输入学号");
+                    int id3 = MyUtil.inputNum(0,Integer.MAX_VALUE);
+                    System.out.println("请输入姓名");
+                    String name3 = input.next();
+                    System.out.println("请输入性别[1.男/2.女]");
+                    String sex3;
+                    int intSex3 = MyUtil.inputNum(1,2);
+                    if (intSex3 == 1){
+                        sex3 = "男";
+                    }else {
+                        sex3 = "女";
+                    }
+                    Student student3 = new Student(id3,name3,sex3);
+                    System.out.println("修改后学号");
+                    int idNew3 = MyUtil.inputNum(0,Integer.MAX_VALUE);
+                    administratorBiz.updateStudentId(student3,idNew3);
+                    break;
+
+                case 8:
+
+                case 9:
+
+                case 0:
+                    return; // 返回上一层
+            }
+        }while (true);
+    }
+
+
+    //迁入迁出
+    private static void in_out() {
+        do {
+            System.out.println();
+            System.out.println("******** 迁入迁出记录 ********");
+            System.out.println("**** (1代表迁入/0代表迁出) ****");
+            administratorBiz.findCheck();
+            System.out.println("******************************");
+            System.out.println();
+            System.out.println("------------------------------");
+            System.out.println();
+            System.out.println("***** 迁入迁出 *****");
+            System.out.println("1 . 迁     入");
+            System.out.println("2 . 迁     出");
+            System.out.println("0 . 返回上一层");
+            System.out.println("请选择编号：");
+            int choice = MyUtil.inputNum(0, 2);
+
+            switch (choice) {
+                case 1:
+                    System.out.println("请输入迁入学号");
+                    int shudentId = MyUtil.inputNum(0,Integer.MAX_VALUE);
+                    administratorBiz.addCheck(shudentId);
+                    break;
+                case 2:
+                    System.out.println("请输入迁入单号");
+                    int checkId = MyUtil.inputNum(0,Integer.MAX_VALUE);
+                    System.out.println("请输入迁入学号");
+                    int id = MyUtil.inputNum(0,Integer.MAX_VALUE);
+                    System.out.println("请确认是否迁出（1.是/2.否）");
+                    int type = MyUtil.inputNum(1,2)-1;
+                    Check check = new Check(checkId,id,type);
+                    administratorBiz.updateCheck(check);
+                    break;
+                case 0:
+                    return; // 返回上一层
+            }
+        }while (true);
+    }
+
+
     // 用户个人主页
     public static void studentView(StudentCard studentCard){
         do {
             System.out.println();
             System.out.println("***** 个人主页 *****");
-            System.out.println("1 . 个人信息🧒");
-            System.out.println("2 . 修改密码🔒");
-            System.out.println("3 . 充值💴");
-            System.out.println("4 . 模拟消费💸");
-            System.out.println("5 . 余额提醒设置🚨");
-            System.out.println("6 . 报修单🛠");
+            System.out.println("1 . 个人信息     🧒");
+            System.out.println("2 . 修改密码     🔒");
+            System.out.println("3 . 充值         💴");
+            System.out.println("4 . 模拟消费     💸");
+            System.out.println("5 . 余额提醒设置 🚨");
+            System.out.println("6 . 报修单       🛠");
             //System.out.println("7 . ");
 
             System.out.println("0 . 返回上一层");
@@ -319,22 +490,45 @@ public class MenuView {
             System.out.println("5 . 个人密保信息");
             System.out.println("0 . 返回上一层");
             System.out.println("请选择编号：");
-            int choice = MyUtil.inputNum(0, 4);
+            int choice = MyUtil.inputNum(0, 5);
+            int studentId = studentCard.getStudentId();
             switch (choice) {
                 case 1:
                     System.out.println("没有写");
+
                     break;
                 case 2:
-                    System.out.println("没有写");
+                    //System.out.println("没有写");
+                    Student s = studentBiz.myStudent(studentId);
+                    if (s == null){
+                        System.out.println("😭");
+                    }else {
+                        System.out.println(s);
+                    }
                     break;
                 case 3:
-                    System.out.println("没有写");
+                    //System.out.println("没有写");
+                    StudentCard sc = studentBiz.myStudentCard(studentId);
+                    if (sc == null){
+                        System.out.println("😭");
+                    }else {
+                        System.out.println(sc);
+                    }
                     break;
                 case 4:
-                    System.out.println("没有写");
+                    //System.out.println("没有写");
+                    Bed b = studentBiz.myBed(studentId);
+                    if (b == null){
+                        System.out.println("😭");
+                    }else {
+                        System.out.println(b);
+                    }
                     break;
                 case 5:
-                    studentBiz.myAllEncrypted(studentCard.getStudentId());
+                    List<Encrypted> list = studentBiz.myAllEncrypted(studentId);
+                    for (Encrypted encrypted : list) {
+                        System.out.println(encrypted);
+                    }
                     break;
                 case 0:
                     return; // 返回上一层

@@ -54,11 +54,11 @@ public class BedDaoImpl extends BaseDaoImpl<Bed> implements BedDao {
     }
 
     @Override
-    public Bed queryBedById(int bedId) {
+    public Bed queryBedById(int studentId) {
         List<Bed> dList = read(bedFile);
         for (int i = 0; i < dList.size(); i++) {
             Bed d = dList.get(i);
-            if (d.getBedId()==bedId){
+            if (d.getStudentId()==studentId){
                 return d;
             }
         }

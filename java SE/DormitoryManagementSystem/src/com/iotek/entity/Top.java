@@ -1,12 +1,17 @@
 package com.iotek.entity;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Top implements Serializable {
     private int studentId;
     private double amount;
-    private Date date;
+    private Date date = new Date()/*{
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        dateFormat.format(date);
+    }*/;
+    //
 
     public Top() {
     }

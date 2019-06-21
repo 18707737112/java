@@ -9,14 +9,17 @@ import java.util.List;
 
 public class StudentBizImpl implements StudentBiz {
     private StudentCardDao studentCardDao = new StudentCardDaoImpl();
+    private BedDao bedDao = new BedDaoImpl();
     private StudentDao studentDao = new StudentDaoImpl();
     private RepairDao repairDao = new RepairDaoImpl();
     private EncryptedDao encryptedDao = new EncryptedDaoImpl();
     private MoneyRemindDao moneyRemindDao = new MoneyRemindDaoImpl();
+    private TopDao topDao = new TopDaoImpl();
 
     @Override
     public boolean register(StudentCard studentCard) {
         // 先看一下用户名是否存在
+        List<Student> studentList = studentDao.queryAllStudents();
         List<StudentCard> sList = studentCardDao.queryAllStudentCards();
         for (StudentCard s : sList) {
             if(s.getStudentId()==studentCard.getStudentId()){
@@ -25,8 +28,15 @@ public class StudentBizImpl implements StudentBiz {
                 return false;
             }
         }
-        // 如果用户名不存在，则说明该用户名可用
-        return studentCardDao.addStudentCard(studentCard);
+        for (Student student : studentList) {
+            if (student.getStudentId() == studentCard.getStudentId()){
+                // 如果用户名不存在，则说明该用户名可用(该学号必须存在)
+                return studentCardDao.addStudentCard(studentCard);
+            }
+        }
+        System.out.println("学号不存在！");
+        System.out.println("亲，只有在校生才能注册哟~~~");
+        return false;
     }
 
     @Override
@@ -44,6 +54,7 @@ public class StudentBizImpl implements StudentBiz {
     //可放在视图层
     @Override
     public void topIn(StudentCard studentCard, double money) {
+        double num = money;
         if(money<0){
             System.err.println("金额不能为负，充值失败！");
             return;
@@ -59,6 +70,11 @@ public class StudentBizImpl implements StudentBiz {
         System.out.println("余额："+studentCard.getMoney());
         System.out.println("押金200");
         System.out.println("可用余额："+(studentCard.getMoney()-200));
+        Top top = new Top(studentCard.getStudentId(),num);
+        flay = topDao.addTop(top);
+        if (!flay){
+            System.out.println("记录录入失败！");
+        }
     }
 
     //可放在视图层
@@ -121,6 +137,22 @@ public class StudentBizImpl implements StudentBiz {
     @Override
     public List<Encrypted> myAllEncrypted(int id) {
         return encryptedDao.queryEncryptedById(id);
+    }
+
+    @Override
+    public Student myStudent(int studentId) {
+        return studentDao.queryStudentById(studentId);
+        //return null;
+    }
+
+    @Override
+    public StudentCard myStudentCard(int studentId) {
+        return studentCardDao.queryStudentCardById(studentId);
+    }
+
+    @Override
+    public Bed myBed(int studentId) {
+        return bedDao.queryBedById(studentId);
     }
 
 }

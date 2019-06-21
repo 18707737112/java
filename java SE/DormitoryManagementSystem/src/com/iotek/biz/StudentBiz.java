@@ -1,9 +1,6 @@
 package com.iotek.biz;
 
-import com.iotek.entity.Administrator;
-import com.iotek.entity.Encrypted;
-import com.iotek.entity.Repair;
-import com.iotek.entity.StudentCard;
+import com.iotek.entity.*;
 
 import java.util.List;
 import java.util.Random;
@@ -19,6 +16,9 @@ public interface StudentBiz {
     boolean addOneEncrypted(Encrypted encrypted);//8.添加一个密保
     //Encrypted myEncrypted(int id);//随机生成一个密保
     List<Encrypted> myAllEncrypted(int id);//9.查询自己的密保(随机生成一个密保)
+    Student myStudent(int studentId);//学生信息
+    StudentCard myStudentCard(int studentId);//学生卡信息
+    Bed myBed(int studentId);//宿舍信息
 
 
 

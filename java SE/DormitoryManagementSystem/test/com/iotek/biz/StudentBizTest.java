@@ -39,7 +39,7 @@ public class StudentBizTest {
 
     @Test
     public void money(){
-        studentBiz.topIn(new StudentCard(2,"不知道","1","妖",100),10);
+        studentBiz.topIn(new StudentCard(2,"不知道","1","妖",100),1000);
         studentBiz.topOut(new StudentCard(2,"不知道","1","妖",100),20);
     }
 
