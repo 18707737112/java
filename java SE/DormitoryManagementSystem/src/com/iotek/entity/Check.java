@@ -4,29 +4,24 @@ import java.io.Serializable;
 //迁入/迁出记录
 public class Check implements Serializable {
     private int checkId;//迁入/迁出单号
-    private int studentId;
-    private int buildId;
-    private int roomId;
-    private int bedId;
-    private int type;
+    private int studentId;//学号
+    private int type = 1;//1.入住/0.迁出
 
     public Check() {
     }
 
-    public Check(int studentId, int buildId, int roomId, int bedId, int type) {
+    public Check(int studentId) {
         this.studentId = studentId;
-        this.buildId = buildId;
-        this.roomId = roomId;
-        this.bedId = bedId;
+    }
+
+    public Check(int studentId, int type) {
+        this.studentId = studentId;
         this.type = type;
     }
 
-    public Check(int checkId, int studentId, int buildId, int roomId, int bedId, int type) {
+    public Check(int checkId, int studentId, int type) {
         this.checkId = checkId;
         this.studentId = studentId;
-        this.buildId = buildId;
-        this.roomId = roomId;
-        this.bedId = bedId;
         this.type = type;
     }
 
@@ -46,30 +41,6 @@ public class Check implements Serializable {
         this.studentId = studentId;
     }
 
-    public int getBuildId() {
-        return buildId;
-    }
-
-    public void setBuildId(int buildId) {
-        this.buildId = buildId;
-    }
-
-    public int getRoomId() {
-        return roomId;
-    }
-
-    public void setRoomId(int roomId) {
-        this.roomId = roomId;
-    }
-
-    public int getBedId() {
-        return bedId;
-    }
-
-    public void setBedId(int bedId) {
-        this.bedId = bedId;
-    }
-
     public int getType() {
         return type;
     }
@@ -82,9 +53,6 @@ public class Check implements Serializable {
     public String toString() {
         return "迁入/迁出单号：" + checkId +" "+
                 "学号：" + studentId +" "+
-                "宿舍楼号：" + buildId +" "+
-                "宿舍号：" + roomId +" "+
-                "床位号：" + bedId +" "+
                 "类型：" + type;
     }
 }

@@ -1,4 +1,4 @@
-package com.iotek.dao;
+package com.iotek.biz;
 
 import com.iotek.biz.AdministratorBiz;
 import com.iotek.biz.impl.AdministratorBizImpl;

@@ -3,7 +3,7 @@ package com.iotek.entity;
 import java.io.Serializable;
 
 public class Encrypted implements Serializable {
-    private int id;
+    private int id;//学号
     private String problem;
     private String answer;
 
@@ -11,6 +11,12 @@ public class Encrypted implements Serializable {
     }
 
     public Encrypted(String problem, String answer) {
+        this.problem = problem;
+        this.answer = answer;
+    }
+
+    public Encrypted(int id, String problem, String answer) {
+        this.id = id;
         this.problem = problem;
         this.answer = answer;
     }

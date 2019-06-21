@@ -6,9 +6,15 @@ public class Bed implements Serializable {
     private int buildId;
     private int roomId;
     private int bedId;
-    private int studentId;
+    private int studentId = 0;
 
     public Bed() {
+    }
+
+    public Bed(int buildId, int roomId, int bedId) {
+        this.buildId = buildId;
+        this.roomId = roomId;
+        this.bedId = bedId;
     }
 
     public Bed(int buildId, int roomId, int bedId, int studentId) {

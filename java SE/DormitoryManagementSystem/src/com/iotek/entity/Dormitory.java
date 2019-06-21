@@ -3,7 +3,7 @@ package com.iotek.entity;
 import java.io.Serializable;
 
 public class Dormitory implements Serializable {
-    private int buildId;//宿舍楼号
+    private int buildId = 0;//宿舍楼号
     private String personSex;
     private int roomNum;//宿舍数量
 

@@ -66,8 +66,8 @@ public class StudentCardDaoImpl extends BaseDaoImpl<StudentCard> implements Stud
                     count++;
                     if (count==3) {
                         System.err.println("密码错误"+count+"次，本次服务到此结束！");
-                        //System.exit(0);
-                        return null;
+                        System.exit(0);
+                        //return null;
                     }
                     try {
                         throw new Exception("密码错误"+count+"次,请重新输入！");
