@@ -15,12 +15,25 @@ public class StudentBizImpl implements StudentBiz {
     private EncryptedDao encryptedDao = new EncryptedDaoImpl();
     private MoneyRemindDao moneyRemindDao = new MoneyRemindDaoImpl();
     private TopDao topDao = new TopDaoImpl();
+    private CheckDao checkDao = new CheckDaoImpl();
 
     @Override
     public boolean register(StudentCard studentCard) {
         // 先看一下用户名是否存在
         List<Student> studentList = studentDao.queryAllStudents();
         List<StudentCard> sList = studentCardDao.queryAllStudentCards();
+        List<Check> cL = checkDao.queryCheckByIdS(studentCard.getStudentId());
+        Check c;
+        if (cL == null || cL.size()==0){
+            System.out.println("没有迁入，不能注册~~~~~~~~~~");
+            return false;
+        }else {
+            c = cL.get(cL.size()-1);
+            if (c.getType() == 0){
+                System.out.println("没有迁入，不能注册~~~~~~~~~~");
+                return false;
+            }
+        }
         for (StudentCard s : sList) {
             if(s.getStudentId()==studentCard.getStudentId()){
                 // 已存在
@@ -104,7 +117,7 @@ public class StudentBizImpl implements StudentBiz {
         }
         System.out.println("付款成功！");
         System.out.println("余额："+studentCard.getMoney());
-        System.out.println("押金200");
+        System.out.println("押金200,迁出退款！");
         System.out.println("可用余额："+(studentCard.getMoney()-200));
         if (myMoney>(studentCard.getMoney()-200)){
             System.out.println("您的卡中可用余额已不足"+myMoney+"，请及时充值！");
@@ -115,6 +128,7 @@ public class StudentBizImpl implements StudentBiz {
     public void myRemind(StudentCard studentCard,int money) {
         int id = studentCard.getStudentId();
         MoneyRemind moneyRemind = moneyRemindDao.queryMoneyRemindById(id);
+        moneyRemind.setMoney(money);
         boolean fiag = moneyRemindDao.addMoneyRemind(moneyRemind);
         if (fiag){
             System.out.println("设置成功！");
@@ -147,7 +161,11 @@ public class StudentBizImpl implements StudentBiz {
 
     @Override
     public StudentCard myStudentCard(int studentId) {
-        return studentCardDao.queryStudentCardById(studentId);
+        StudentCard studentCard = studentCardDao.queryStudentCardById(studentId);
+        Student student = studentDao.queryStudentById(studentId);
+        studentCard.setStudetName(student.getStudentName());
+        studentCard.setSex(student.getSex());
+        return studentCard;
     }
 
     @Override

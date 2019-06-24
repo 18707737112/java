@@ -52,11 +52,11 @@ public class RoomDaoImpl extends BaseDaoImpl<Room> implements RoomDao {
     }
 
     @Override
-    public Room queryRoomById(int roomId) {
+    public Room queryRoomById(int id,int roomId) {
         List<Room> rList = read(roomFile);
         for (int i = 0; i < rList.size(); i++) {
             Room r = rList.get(i);
-            if (r.getRoomId()==roomId){
+            if (r.getRoomId()==roomId&&id==r.getBuildId()){
                 return r;
             }
         }

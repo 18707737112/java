@@ -45,11 +45,14 @@ public class BedDaoImpl extends BaseDaoImpl<Bed> implements BedDao {
         List<Bed> dList = read(bedFile);
         for (int i = 0; i < dList.size(); i++) {
             Bed d = dList.get(i);
-            if(d.getBedId() == bed.getBedId()){
+            if(d.getBedId() == bed.getBedId()
+            && d.getRoomId() == bed.getRoomId()
+            && d.getBuildId() == bed.getBuildId()){
                 dList.set(i,bed);
                 return write(dList,bedFile);
             }
         }
+        System.out.println("该床位不存在！");
         return false;
     }
 

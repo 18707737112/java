@@ -18,6 +18,10 @@ public interface AdministratorBiz {
     boolean updateDormitory(Dormitory dormitory);//修改
     boolean addRoom(Room room);//添加宿舍
     boolean updateRoom(Room room);//修改
+    boolean addB(Bed bed);//新建床位
+    boolean updateB(Bed bed);//修改床位
+    void findNullBed(Dormitory dormitory);//查看宿舍楼每个宿舍空床数量
+    void findNullBedArray(Room room);
     boolean addBed(Bed bed,String sex);//新人入住
     boolean updateBed(Bed bed,String sex);//修改(调换学生宿舍)
 }

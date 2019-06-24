@@ -42,7 +42,7 @@ public class RoomDaoTest {
 
     @Test
     public void findId(){
-        Room r = roomDao.queryRoomById(2);
+        Room r = roomDao.queryRoomById(1,2);
 
         System.out.println(r);
     }

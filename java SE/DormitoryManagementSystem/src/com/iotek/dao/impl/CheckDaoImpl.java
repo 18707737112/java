@@ -64,16 +64,17 @@ public class CheckDaoImpl extends BaseDaoImpl<Check> implements CheckDao {
     }
 
     @Override
-    public Check queryCheckByIdS(int studentId) {
+    public List<Check> queryCheckByIdS(int studentId) {
         List<Check> cList = read(checkFile);
-        Check check = new Check();
+        List<Check> newList = new ArrayList<>();
+        //Check check = new Check();
         for (int i = 0; i < cList.size(); i++) {
             Check c = cList.get(i);
             if (c.getStudentId()==studentId){
-                check = c;
+                newList.add(c);
             }
         }
-        return check;
+        return newList;
     }
 
     @Override

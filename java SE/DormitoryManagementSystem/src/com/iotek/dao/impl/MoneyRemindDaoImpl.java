@@ -15,13 +15,9 @@ public class MoneyRemindDaoImpl extends BaseDaoImpl implements MoneyRemindDao {
         if (moneyRemind == null){
             return false;
         }
-        if (mList == null){
-            mList.add(moneyRemind);
-            return  write(mList,moneyRemindFile);
-        }
-        int count = 0;
+
         for (int i = 0; i < mList.size(); i++) {
-            if (mList.get(i).equals(moneyRemind)){
+            if (mList.get(i).getId()==moneyRemind.getId()){
                 mList.set(i,moneyRemind);
                 return  write(mList,moneyRemindFile);
             }
