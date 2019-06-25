@@ -37,7 +37,7 @@ public class BedDaoTest {
 
     @Test
     public void del(){
-        bedDao.delBed(1);
+        bedDao.delBed(20190001);
         findAll();
     }
 

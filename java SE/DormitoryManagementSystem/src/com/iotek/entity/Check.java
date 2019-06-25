@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class Check implements Serializable {
     private int checkId;//迁入/迁出单号
     private int studentId;//学号
-    private int type = 1;//1.入住/0.迁出
+    private int type = 1;//1.授权/0.迁出
 
     public Check() {
     }
@@ -51,7 +51,7 @@ public class Check implements Serializable {
 
     @Override
     public String toString() {
-        return "迁入/迁出单号：" + checkId +" "+
+        return "授权/迁出单号：" + checkId +" "+
                 "学号：" + studentId +" "+
                 "类型：" + type;
     }

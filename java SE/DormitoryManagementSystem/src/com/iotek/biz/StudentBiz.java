@@ -19,6 +19,7 @@ public interface StudentBiz {
     Student myStudent(int studentId);//学生信息
     StudentCard myStudentCard(int studentId);//学生卡信息
     Bed myBed(int studentId);//宿舍信息
+    void findTop();
 
 
 

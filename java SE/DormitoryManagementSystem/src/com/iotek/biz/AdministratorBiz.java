@@ -7,8 +7,13 @@ public interface AdministratorBiz {
     Administrator login(Administrator administrator); //1.登录
     boolean addStudent(Student student);//添加学生信息
     void lookAllStudents();//查询学生信息
+    void lookIdStudents(int id);//查询一个学生
+    void lookRoomStudents(int idDormitory,int idRoom);//查询一屋学生
+    void lookDormitoryStudents(int idDormitory);//查询一楼学生
     void updateStudent(Student student);//查询学生信息
     void lookAllBed();//查询学生宿舍
+    void lookRecords();//查询所有报修记录
+    void lookNotRecords();//查询所有报修记录
     //void updateBed(Bed bed);//调换学生宿舍
     void updateStudentId(Student student,int id);//修改学号
     void findCheck();//查询迁入迁出记录
@@ -24,4 +29,6 @@ public interface AdministratorBiz {
     void findNullBedArray(Room room);
     boolean addBed(Bed bed,String sex);//新人入住
     boolean updateBed(Bed bed,String sex);//修改(调换学生宿舍)
+    boolean updateTowBed(int sId1,int sId2);//调换学生宿舍
+    boolean repair(int repairId,int state);
 }

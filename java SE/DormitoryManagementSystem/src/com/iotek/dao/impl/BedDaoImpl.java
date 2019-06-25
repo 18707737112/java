@@ -28,11 +28,11 @@ public class BedDaoImpl extends BaseDaoImpl<Bed> implements BedDao {
     }
 
     @Override
-    public boolean delBed(int bedId) {
+    public boolean delBed(int sId) {
         List<Bed> list = read(bedFile);
         for (int i = 0; i < list.size(); i++) {
             Bed b = list.get(i);
-            if(b.getBedId() == bedId){
+            if(b.getStudentId() == sId){
                 list.remove(i);
                 return write(list,bedFile);
             }

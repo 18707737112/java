@@ -88,11 +88,20 @@ public class Repair implements Serializable {
 
     @Override
     public String toString() {
-        return  "报修单号：" + repairId +" "+
-                "学号：" + studentId +" "+
-                "宿舍楼号：" + buildId +" "+
-                "宿舍号：" + roomId +" "+
-                "报修物品：" + thingName +" "+
-                "修理状态：" + state;
+        if (state == 1){
+            return  "报修单号：" + repairId +" "+
+                    "学号：" + studentId +" "+
+                    "宿舍楼号：" + buildId +" "+
+                    "宿舍号：" + roomId +" "+
+                    "报修物品：" + thingName +" "+
+                    "修理状态：" + "已修";
+        }else {
+            return  "报修单号：" + repairId +" "+
+                    "学号：" + studentId +" "+
+                    "宿舍楼号：" + buildId +" "+
+                    "宿舍号：" + roomId +" "+
+                    "报修物品：" + thingName +" "+
+                    "修理状态：" + "未修";
+        }
     }
 }

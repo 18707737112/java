@@ -9,6 +9,7 @@ import org.junit.Test;
 import java.util.List;
 
 public class AdministratorBizTest {
+
     private AdministratorBiz administratorBiz = new AdministratorBizImpl();
 
     @Test

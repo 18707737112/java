@@ -58,9 +58,17 @@ public class Bed implements Serializable {
 
     @Override
     public String toString() {
-        return "宿舍楼号：" + buildId +" "+
-                "房间号：" + roomId +" "+
-                "床位号：" + bedId +" "+
-                "状态：" + studentId;
+        if (studentId == 0){
+            return "宿舍楼号：" + buildId +" "+
+                    "房间号：" + roomId +" "+
+                    "床位号：" + bedId +" "+
+                    "状态：" + "空";
+        }else {
+            return "宿舍楼号：" + buildId +" "+
+                    "房间号：" + roomId +" "+
+                    "床位号：" + bedId +" "+
+                    "状态：" + "满"+"\n"+
+                    "在位学员学号："+studentId;
+        }
     }
 }

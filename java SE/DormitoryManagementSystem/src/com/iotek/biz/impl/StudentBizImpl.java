@@ -6,6 +6,7 @@ import com.iotek.dao.impl.*;
 import com.iotek.entity.*;
 
 import java.util.List;
+import java.util.Scanner;
 
 public class StudentBizImpl implements StudentBiz {
     private StudentCardDao studentCardDao = new StudentCardDaoImpl();
@@ -25,12 +26,12 @@ public class StudentBizImpl implements StudentBiz {
         List<Check> cL = checkDao.queryCheckByIdS(studentCard.getStudentId());
         Check c;
         if (cL == null || cL.size()==0){
-            System.out.println("没有迁入，不能注册~~~~~~~~~~");
+            System.out.println("没有授权，不能注册~~~~~~~~~~");
             return false;
         }else {
             c = cL.get(cL.size()-1);
             if (c.getType() == 0){
-                System.out.println("没有迁入，不能注册~~~~~~~~~~");
+                System.out.println("没有授权，不能注册~~~~~~~~~~");
                 return false;
             }
         }
@@ -54,7 +55,25 @@ public class StudentBizImpl implements StudentBiz {
 
     @Override
     public StudentCard login(StudentCard studentCard) {
+        if (studentCard == null){
+            return null;
+        }
         StudentCard s = studentCardDao.queryStudentCardByNameAndPassword(studentCard.getStudentId(),studentCard.getPassword());
+        if (s == null){
+            return null;
+        }
+        List<Check> cL = checkDao.queryCheckByIdS(s.getStudentId());
+        Check c;
+        if (cL == null || cL.size()==0){
+            System.out.println("未授权~");
+            return null;
+        }else {
+            c = cL.get(cL.size()-1);
+            if(c.getType() == 0){
+                System.out.println("已迁出~~~");
+                return null;
+            }
+        }
         return s;
     }
 
@@ -100,9 +119,18 @@ public class StudentBizImpl implements StudentBiz {
             System.err.println("金额不能为负，付款失败！");
             return;
         }
+        if(money>100){
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("支付金额超过100，为了您的资金安全，请输入支付密码：");
+            String string = scanner.next();
+            if (!string.equals(studentCard.getPassword())){
+                System.out.println("密码错误！");
+                System.out.println("付款未成功，请重新操作！");
+                return;
+            }
+        }
         double useMoney = studentCard.getMoney()-200;
         money = studentCard.getMoney() - money;
-        studentCard.setMoney(money);
         if (money<200){
             System.out.println("付款未成功！");
             System.out.println("亲，押金200喲！😊😊😊😊😊😊");
@@ -110,6 +138,7 @@ public class StudentBizImpl implements StudentBiz {
             System.out.println("您的卡中可用余额已不足支付，请及时充值！");
             return;
         }
+        studentCard.setMoney(money);
         boolean flay = studentCardDao.updateStudentCard(studentCard);
         if (!flay){
             System.out.println("付款未成功，请重新操作！");
@@ -171,6 +200,14 @@ public class StudentBizImpl implements StudentBiz {
     @Override
     public Bed myBed(int studentId) {
         return bedDao.queryBedById(studentId);
+    }
+
+    @Override
+    public void findTop() {
+        List<Top> list = topDao.queryAllTops();
+        for (Top top : list) {
+            System.out.println(top);
+        }
     }
 
 }

@@ -48,6 +48,27 @@ public class CheckDaoImpl extends BaseDaoImpl<Check> implements CheckDao {
                 return write(cList,checkFile);
             }
         }
+        /*List<Check> cL = queryCheckByIdS(check.getStudentId());
+        Check c;
+        if (cL == null || cL.size()==0){
+            for (int i = 0; i < cList.size(); i++) {
+                Check check1 = cList.get(i);
+                if(check1.getCheckId() == check.getCheckId()){
+                    cList.set(i,check);
+                    return write(cList,checkFile);
+                }
+            }
+        }else {
+            c = cL.get(cL.size()-1);
+            for (int i = 0; i < cList.size(); i++) {
+                Check check1 = cList.get(i);
+                if(check1.equals(c)){
+                    cList.set(i,check);
+                    return write(cList,checkFile);
+                }
+            }
+        }*/
+
         return false;
     }
 
